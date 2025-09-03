@@ -47,7 +47,9 @@ public class BukkitCustomItemsPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        metrics.shutdown();
+        if (metrics != null) {
+            metrics.shutdown();
+        }
     }
 
     public void register() {
