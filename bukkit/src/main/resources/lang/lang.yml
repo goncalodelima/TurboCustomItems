@@ -1,0 +1,3 @@
+invalid-player: "&cThe entered player is invalid."
+invalid-customitem: "&cThe entered customItem is invalid. The available ones are: %customItems%"
+customitem-received: "&aYou have successfully received the item '%customItem%'!"

@@ -1,0 +1,11 @@
+material: "cobblestone"
+name: "&aEnchanted Stone"
+lore:
+  - "&7This item is insane"
+enchants:
+  - "arrow_damage:1"
+flags:
+  - "hide_enchants"
+stackable: true
+nbt:
+  - "turbocustomitems_item:true" #Format: nbt_key:value, value can be true/false, double, integer, string, etc
