@@ -36,12 +36,12 @@ public class BukkitCustomItemsPlugin extends JavaPlugin {
 
         customItemService = new CustomItemService();
 
-        Set<CustomItem> customItems = new CustomItemLoader(this, items).setup();
-        customItems.forEach(customItem -> customItemService.put(customItem));
-
         register();
 
         metrics = new Metrics(this, 27163);
+
+        Set<CustomItem> customItems = new CustomItemLoader(this, items).setup();
+        customItems.forEach(customItem -> customItemService.put(customItem));
 
     }
 

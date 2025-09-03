@@ -107,21 +107,6 @@ public class CustomItemAdapter implements ConfigurationAdapter<CustomItem> {
             flags.add(xItemFlagOptional.get());
         }
 
-        ItemStack item = new ItemStack(XMaterial.STONE_BUTTON.get());
-
-//        for (String string : nbtList) {
-//
-//            try {
-//                NBT.parseNBT(string);
-//            } catch (NbtApiException | NullPointerException e) {
-//                e.printStackTrace();
-//                plugin.getLogger().log(Level.SEVERE, "Inserted item nbt is invalid in 'items/" + identifier + ".yml'.");
-//                plugin.getServer().getPluginManager().disablePlugin(plugin);
-//                return null;
-//            }
-//
-//        }
-
         return new CustomItem(identifier, xMaterialOptional.get(), name, lore, enchantments, flags, new HashSet<>(nbtList), stackable);
     }
 
