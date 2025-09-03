@@ -4,5 +4,8 @@
 
 <img width="1210" height="319" alt="image" src="https://github.com/user-attachments/assets/5989aece-4303-4e5c-a63a-b7cfac65e262" />
 
+<img width="452" height="146" alt="image" src="https://github.com/user-attachments/assets/94692c9c-a979-4eac-9c66-8ca41bf4f583" />
+
+
 ## Do you need support?
 Contact us on Discord: [Click here](https://discord.gg/uCZCmXKjKa)
