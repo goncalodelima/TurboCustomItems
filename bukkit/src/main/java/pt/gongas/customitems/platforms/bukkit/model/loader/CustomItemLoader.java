@@ -1,7 +1,6 @@
 package pt.gongas.customitems.platforms.bukkit.model.loader;
 
 import org.bukkit.configuration.ConfigurationSection;
-import pt.gongas.customitems.platforms.bukkit.BukkitCustomItemsPlugin;
 import pt.gongas.customitems.platforms.bukkit.model.CustomItem;
 import pt.gongas.customitems.platforms.bukkit.model.adapter.CustomItemAdapter;
 import pt.gongas.customitems.platforms.bukkit.util.config.BukkitConfiguration;
@@ -12,12 +11,11 @@ import java.util.Set;
 
 public class CustomItemLoader {
 
-    private final CustomItemAdapter adapter;
+    private final CustomItemAdapter adapter = new CustomItemAdapter();
 
     private final List<BukkitConfiguration> items;
 
-    public CustomItemLoader(BukkitCustomItemsPlugin plugin, List<BukkitConfiguration> items) {
-        this.adapter = new CustomItemAdapter(plugin);
+    public CustomItemLoader(List<BukkitConfiguration> items) {
         this.items = items;
     }
 
@@ -26,14 +24,9 @@ public class CustomItemLoader {
         Set<CustomItem> items = new HashSet<>();
 
         for (BukkitConfiguration configuration : this.items) {
-
             ConfigurationSection section = configuration.getConfigurationSection("");
             CustomItem customItem = adapter.adapt(configuration.getNameWithoutExtension(), section);
-
-            if (customItem != null) {
-                items.add(customItem);
-            }
-
+            items.add(customItem);
         }
 
         return items;
