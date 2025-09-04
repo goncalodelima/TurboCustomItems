@@ -20,7 +20,7 @@ tasks {
 }
 
 group = "pt.gongas"
-version = "1.0.1"
+version = "1.0.2"
 description = "Bukkit module for TurboCustomItems"
 
 dependencies {

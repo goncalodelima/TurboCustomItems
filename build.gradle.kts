@@ -1,6 +1,6 @@
 allprojects {
     group = "pt.gongas"
-    version = "1.0.1"
+    version = "1.0.2"
     description = "CustomItems plugin system"
     ext.set("id", "turbocustomitems")
     ext.set("website", "https://github.com/goncalodelima")
