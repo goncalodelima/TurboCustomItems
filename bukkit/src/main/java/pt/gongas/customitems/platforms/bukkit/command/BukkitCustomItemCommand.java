@@ -4,13 +4,15 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import pt.gongas.customitems.platforms.bukkit.model.CustomItem;
-import pt.gongas.customitems.platforms.bukkit.model.service.CustomItemFoundationService;
+import pt.gongas.customitems.platforms.bukkit.BukkitCustomItemsPlugin;
+import pt.gongas.customitems.shared.customitem.CustomItem;
+import pt.gongas.customitems.shared.customitem.service.CustomItemFoundationService;
 import pt.gongas.customitems.platforms.bukkit.util.config.BukkitConfiguration;
 import pt.gongas.customitems.shared.util.KeyConstants;
 import de.tr7zw.nbtapi.NBT;
@@ -19,13 +21,16 @@ import java.util.*;
 import java.util.Optional;
 
 @CommandAlias("customitem|customitems|citem|citems|customi")
-public class CustomItemCommand extends BaseCommand {
+public class BukkitCustomItemCommand extends BaseCommand {
+
+    private final BukkitCustomItemsPlugin plugin;
 
     private final BukkitConfiguration lang;
 
-    private final CustomItemFoundationService customItemService;
+    private final CustomItemFoundationService<XEnchantment, XItemFlag, XMaterial, ItemStack> customItemService;
 
-    public CustomItemCommand(BukkitConfiguration lang, CustomItemFoundationService customItemService) {
+    public BukkitCustomItemCommand(BukkitCustomItemsPlugin plugin, BukkitConfiguration lang, CustomItemFoundationService<XEnchantment, XItemFlag, XMaterial, ItemStack> customItemService) {
+        this.plugin = plugin;
         this.lang = lang;
         this.customItemService = customItemService;
     }
@@ -43,14 +48,19 @@ public class CustomItemCommand extends BaseCommand {
             return;
         }
 
-        Optional<CustomItem> customItemOptional = customItemService.get(identifier);
+        Optional<CustomItem<XEnchantment, XItemFlag, XMaterial, ItemStack>> customItemOptional = customItemService.get(identifier);
 
         if (!customItemOptional.isPresent()) {
             sender.sendMessage(lang.getString("invalid-customitem", "§cMissing 'invalid-customitem' in your 'lang/lang.yml'.").replace("%customItems%", String.join(", ", customItemService.getKeys())).replace("&", "§"));
             return;
         }
 
-        CustomItem customItem = customItemOptional.get();
+        if (amount <= 0) {
+            sender.sendMessage(lang.getString("invalid-amount", "§cMissing 'invalid-amount' in your 'lang/lang.yml'.").replace("&", "§"));
+            return;
+        }
+
+        CustomItem<XEnchantment, XItemFlag, XMaterial, ItemStack> customItem = customItemOptional.get();
         ItemStack itemToGive = new ItemStack(customItem.getMaterial().get(), amount, customItem.getMaterial().getData());
 
         String name = customItem.getName();
@@ -107,6 +117,13 @@ public class CustomItemCommand extends BaseCommand {
 
         target.sendMessage(lang.getString("customitem-received", "§cMissing 'customitem-received' in your 'lang/lang.yml'.").replace("%customItem%", customItem.getIdentifier()).replace("&", "§"));
         target.getInventory().addItem(itemToGive);
+    }
+
+    @Subcommand("reload")
+    @CommandPermission("turbocustomitems.admin")
+    public void reload(CommandSender sender) {
+        plugin.reload();
+        sender.sendMessage(lang.getString("reload", "§cMissing 'reload' in your 'lang/lang.yml'.").replace("&", "§"));
     }
 
 }

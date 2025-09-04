@@ -25,7 +25,6 @@ description = "Bukkit module for TurboCustomItems"
 
 dependencies {
     api(project(":shared"))
-    implementation(project(":bukkit:v1_8_R3"))
     compileOnly("org.purpurmc.purpur:purpur-api:1.16.5-R0.1-SNAPSHOT")
     implementation("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
     implementation("com.github.cryptomorin:XSeries:13.3.3")

@@ -1,3 +1,5 @@
 invalid-player: "&cThe entered player is invalid."
 invalid-customitem: "&cThe entered customItem is invalid. The available ones are: %customItems%"
+invalid-amount: "§cThe entered amount is invalid."
 customitem-received: "&aYou have successfully received the item '%customItem%'!"
+reload: "&aPlugin reloaded successfully."
