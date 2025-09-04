@@ -1,29 +1,43 @@
 package pt.gongas.customitems.platforms.bukkit;
 
 import co.aikar.commands.BukkitCommandManager;
+import com.cryptomorin.xseries.XEnchantment;
+import com.cryptomorin.xseries.XItemFlag;
+import com.cryptomorin.xseries.XMaterial;
 import de.tr7zw.nbtapi.utils.metrics.bukkit.Metrics;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import pt.gongas.customitems.platforms.bukkit.command.CustomItemCommand;
-import pt.gongas.customitems.platforms.bukkit.model.CustomItem;
-import pt.gongas.customitems.platforms.bukkit.model.loader.CustomItemLoader;
-import pt.gongas.customitems.platforms.bukkit.model.service.CustomItemFoundationService;
-import pt.gongas.customitems.platforms.bukkit.model.service.CustomItemService;
+import pt.gongas.customitems.platforms.bukkit.command.BukkitCustomItemCommand;
+import pt.gongas.customitems.platforms.bukkit.model.loader.BukkitCustomItemLoader;
+import pt.gongas.customitems.shared.customitem.CustomItem;
+import pt.gongas.customitems.shared.customitem.service.CustomItemFoundationService;
+import pt.gongas.customitems.platforms.bukkit.model.service.BukkitCustomItemService;
 import pt.gongas.customitems.platforms.bukkit.util.config.BukkitConfiguration;
+import pt.gongas.customitems.shared.platform.PlatformLoader;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class BukkitCustomItemsPlugin extends JavaPlugin {
+public class BukkitCustomItemsPlugin extends JavaPlugin implements PlatformLoader<XEnchantment, XItemFlag, XMaterial, ItemStack> {
 
     private BukkitConfiguration lang;
 
     private List<BukkitConfiguration> items;
 
-    private CustomItemFoundationService customItemService;
+    private CustomItemFoundationService<XEnchantment, XItemFlag, XMaterial, ItemStack> customItemService;
+
+    private BukkitCommandManager bukkitCommandManager;
 
     private Metrics metrics;
+
+    public static BukkitCustomItemsPlugin LOADER;
+
+    @Override
+    public void onLoad() {
+        LOADER = this;
+    }
 
     @Override
     public void onEnable() {
@@ -34,9 +48,9 @@ public class BukkitCustomItemsPlugin extends JavaPlugin {
         items = new ArrayList<>();
         loadItems();
 
-        customItemService = new CustomItemService();
+        customItemService = new BukkitCustomItemService();
 
-        Set<CustomItem> customItems = new CustomItemLoader(items).setup();
+        Set<CustomItem<XEnchantment, XItemFlag, XMaterial, ItemStack>> customItems = new BukkitCustomItemLoader(items).setup();
         customItems.forEach(customItem -> customItemService.put(customItem));
 
         register();
@@ -52,17 +66,33 @@ public class BukkitCustomItemsPlugin extends JavaPlugin {
         }
     }
 
-    public void register() {
-        registerCommand();
+    @Override
+    public void reload() {
+
+        if (lang != null) {
+            lang.reloadConfig();
+        }
+
+        items.clear();
+        loadItems();
+
+        customItemService.clear();
+
+        Set<CustomItem<XEnchantment, XItemFlag, XMaterial, ItemStack>> customItems = new BukkitCustomItemLoader(items).setup();
+        customItems.forEach(customItem -> customItemService.put(customItem));
+
+        bukkitCommandManager.getCommandCompletions().registerAsyncCompletion("customitems", c -> new ArrayList<>(customItemService.getKeys()));
     }
 
-    public void registerCommand() {
-        BukkitCommandManager commandManager = new BukkitCommandManager(this);
-        commandManager.registerCommand(new CustomItemCommand(lang, customItemService));
-        commandManager.getCommandCompletions().registerAsyncCompletion("customitems", c -> new ArrayList<>(customItemService.getKeys()));
+    @Override
+    public void registerCommands() {
+        bukkitCommandManager = new BukkitCommandManager(this);
+        bukkitCommandManager.registerCommand(new BukkitCustomItemCommand(this, lang, customItemService));
+        bukkitCommandManager.getCommandCompletions().registerAsyncCompletion("customitems", c -> new ArrayList<>(customItemService.getKeys()));
     }
 
-    private void loadItems() {
+    @Override
+    public void loadItems() {
 
         File folder = new File(getDataFolder(), "items");
 
@@ -87,6 +117,11 @@ public class BukkitCustomItemsPlugin extends JavaPlugin {
             items.add(config);
         }
 
+    }
+
+    @Override
+    public CustomItemFoundationService<XEnchantment, XItemFlag, XMaterial, ItemStack> getCustomItemService() {
+        return customItemService;
     }
 
 }

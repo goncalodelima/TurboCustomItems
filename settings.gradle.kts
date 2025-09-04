@@ -27,6 +27,5 @@ rootProject.name = "TurboCustomItems"
 
 include(":shared")
 include(":bukkit")
-include(":bukkit:v1_8_R3")
 include("bukkit")
 include("shared")
