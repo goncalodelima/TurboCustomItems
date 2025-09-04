@@ -100,11 +100,11 @@ public class BukkitCustomItemsPlugin extends JavaPlugin implements PlatformLoade
             folder.mkdirs();
         }
 
-        File[] files = folder.listFiles((dir, name) -> name.endsWith(".yml"));
+        File[] files = folder.listFiles((dir, name) -> !name.equals(".yml") && name.endsWith(".yml"));
 
         if (files == null || files.length == 0) {
             saveResource("items/enchanted_stone.yml", false);
-            files = folder.listFiles((dir, name) -> name.endsWith(".yml"));
+            files = folder.listFiles((dir, name) -> !name.equals(".yml") && name.endsWith(".yml"));
         }
 
         if (files == null) {

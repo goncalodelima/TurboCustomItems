@@ -41,11 +41,7 @@ public class BukkitConfiguration extends YamlConfiguration implements Configurat
     }
 
     public String getNameWithoutExtension() {
-        if (name.contains(".")) {
-            return name.substring(0, name.lastIndexOf('.'));
-        } else {
-            return name;
-        }
+        return name.substring(0, name.lastIndexOf('.'));
     }
 
 }
