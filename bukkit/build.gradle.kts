@@ -20,7 +20,7 @@ tasks {
 }
 
 group = "pt.gongas"
-version = "1.0.2"
+version = "1.0.3"
 description = "Bukkit module for TurboCustomItems"
 
 dependencies {
@@ -49,7 +49,7 @@ bukkit {
     main = "pt.gongas.customitems.platforms.bukkit.BukkitCustomItemsPlugin"
     depend = listOf("NBTAPI")
     author = "ReeachyZ_"
-    website = "https://github.com/goncalodelima"
+    website = "https://github.com/goncalodelima/TurboCustomItems"
     description = "CustomItems Plugin"
     apiVersion = "1.13"
 }

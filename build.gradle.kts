@@ -1,9 +1,9 @@
 allprojects {
     group = "pt.gongas"
-    version = "1.0.2"
+    version = "1.0.3"
     description = "CustomItems plugin system"
     ext.set("id", "turbocustomitems")
-    ext.set("website", "https://github.com/goncalodelima")
+    ext.set("website", "https://github.com/goncalodelima/TurboCustomItems")
     ext.set("author", "ReeachyZ_")
 }
 

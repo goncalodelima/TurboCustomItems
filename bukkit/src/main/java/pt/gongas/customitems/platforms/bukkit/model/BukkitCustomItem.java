@@ -21,7 +21,7 @@ public final class BukkitCustomItem implements CustomItem<XEnchantment, XItemFla
     private final boolean stackable;
 
     public BukkitCustomItem(String identifier, XMaterial material, String name, List<String> lore, Map<XEnchantment, Integer> enchantments, Set<XItemFlag> flags, Set<String> nbt, ItemStack item, boolean stackable) {
-        this.identifier = Objects.requireNonNull(identifier, "identifier");
+        this.identifier = identifier;
         this.material = material;
         this.name = name;
         this.lore = lore;
