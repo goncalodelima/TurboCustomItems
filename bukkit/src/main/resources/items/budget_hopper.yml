@@ -1,0 +1,11 @@
+material: "hopper" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
+name: "&aBudget Hopper"
+lore:
+  - "&7This item is insane"
+enchants:
+  - "unbreaking:1"
+flags:
+  - "hide_enchants"
+stackable: false
+nbt:
+  - "turbocustomitems_item:budget_hopper" #Format: nbt_key:value, value can be true/false, double, integer, string, etc

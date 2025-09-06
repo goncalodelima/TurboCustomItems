@@ -1,0 +1,11 @@
+material: "feather"
+name: "&aFly Catcher"
+lore:
+  - "&7Increases minion speed by &e20%&7."
+enchants:
+  - "unbreaking:1"
+flags:
+  - "hide_enchants"
+stackable: false
+nbt:
+  - "turbocustomitems_item:fly_catcher"

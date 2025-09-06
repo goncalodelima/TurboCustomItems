@@ -1,0 +1,11 @@
+material: "nether_star" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
+name: "&aMinion Expander"
+lore:
+  - "&7Increases minion range by &e1 block &7and speed by &e5%&7."
+enchants:
+  - "unbreaking:1"
+flags:
+  - "hide_enchants"
+stackable: false
+nbt:
+  - "turbocustomitems_item:minion_expander" #Format: nbt_key:value, value can be true/false, double, integer, string, etc
