@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "pt.gongas"
-version = "1.0.3"
+version = "1.0.4"
 description = "Shared module for TurboCustomItems"
 
 tasks.withType<JavaCompile> {

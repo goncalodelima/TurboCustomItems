@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import pt.gongas.customitems.platforms.bukkit.BukkitCustomItemsPlugin;
 import pt.gongas.customitems.shared.customitem.CustomItem;
 import pt.gongas.customitems.shared.customitem.service.CustomItemFoundationService;
@@ -61,58 +60,12 @@ public class BukkitCustomItemCommand extends BaseCommand {
         }
 
         CustomItem<XEnchantment, XItemFlag, XMaterial, ItemStack> customItem = customItemOptional.get();
-        ItemStack itemToGive = new ItemStack(customItem.getMaterial().get(), amount, customItem.getMaterial().getData());
-
-        String name = customItem.getName();
-        List<String> lore = customItem.getLore();
-        Set<XItemFlag> flags = customItem.getFlags();
-        Map<XEnchantment, Integer> enchantments = customItem.getEnchantments();
-        Set<String> nbt = customItem.getNbt();
-
-        boolean hasName = name != null;
-        boolean hasLore = !lore.isEmpty();
-        boolean hasFlags = !flags.isEmpty();
-        boolean hasEnchantments = !enchantments.isEmpty();
-
-        if (hasName || hasLore || hasFlags || hasEnchantments) {
-
-            ItemMeta meta = itemToGive.getItemMeta();
-
-            if (hasName) {
-                meta.setDisplayName(name);
-            }
-
-            if (hasLore) {
-                meta.setLore(lore);
-            }
-
-            if (hasFlags) {
-                for (XItemFlag flag : flags) {
-                    meta.addItemFlags(flag.get());
-                }
-            }
-
-            if (hasEnchantments) {
-                for (Map.Entry<XEnchantment, Integer> entry : enchantments.entrySet()) {
-                    meta.addEnchant(entry.getKey().get(), entry.getValue(), false);
-                }
-            }
-
-            itemToGive.setItemMeta(meta);
-        }
+        ItemStack itemToGive = customItem.getItem();
 
         if (!customItem.isStackable()) {
             NBT.modify(itemToGive, readWriteItemNBT -> {
                 readWriteItemNBT.setUUID(KeyConstants.ITEM_UUID, UUID.randomUUID());
             });
-        }
-
-        if (!nbt.isEmpty()) {
-            for (String string : nbt) {
-                NBT.modify(itemToGive, readWriteItemNBT -> {
-                    readWriteItemNBT.mergeCompound(NBT.parseNBT("{" + string + "}"));
-                });
-            }
         }
 
         target.sendMessage(lang.getString("customitem-received", "§cMissing 'customitem-received' in your 'lang/lang.yml'.").replace("%customItem%", customItem.getIdentifier()).replace("&", "§"));
