@@ -1,0 +1,9 @@
+material: "dispenser" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
+name: "&aCompactor"
+lore:
+  - "&7Compacts all craftable items into block form."
+enchants: []
+flags: []
+stackable: false
+nbt:
+  - "turbocustomitems_item:compactor" #Format: nbt_key:value, value can be true/false, double, integer, string, etc

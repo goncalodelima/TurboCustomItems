@@ -1,0 +1,11 @@
+material: "coal" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
+name: "&aEnchanted Coal"
+lore:
+  - "&7This item is insane"
+enchants:
+  - "unbreaking:1"
+flags:
+  - "hide_enchants"
+stackable: true
+nbt:
+  - "turbocustomitems_item:enchanted_coal" #Format: nbt_key:value, value can be true/false, double, integer, string, etc

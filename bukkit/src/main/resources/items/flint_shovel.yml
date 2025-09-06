@@ -1,0 +1,11 @@
+material: "flint"
+name: "&aFlint Shovel"
+lore:
+  - "&7Guarantees Flint from Gravel Minions."
+enchants:
+  - "unbreaking:1"
+flags:
+  - "hide_enchants"
+stackable: false
+nbt:
+  - "turbocustomitems_item:flint_shovel"

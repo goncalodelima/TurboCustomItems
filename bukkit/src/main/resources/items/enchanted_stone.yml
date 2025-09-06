@@ -1,4 +1,4 @@
-material: "cobblestone" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
+material: "stone" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
 name: "&aEnchanted Stone"
 lore:
   - "&7This item is insane"

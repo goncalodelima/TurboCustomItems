@@ -1,0 +1,11 @@
+material: "diamond" #If you are on a legacy version, you can use items with data as well. Example: PINK_WOOL
+name: "&aDiamond Spreading"
+lore:
+  - "&7Adds a &e10% &7chance to generate a Diamond with minions."
+enchants:
+  - "unbreaking:1"
+flags:
+  - "hide_enchants"
+stackable: false
+nbt:
+  - "turbocustomitems_item:diamond_spreading" #Format: nbt_key:value, value can be true/false, double, integer, string, etc
