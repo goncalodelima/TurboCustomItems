@@ -6,6 +6,64 @@
 
 <img width="452" height="146" alt="image" src="https://github.com/user-attachments/assets/94692c9c-a979-4eac-9c66-8ca41bf4f583" />
 
+---
+
+## 📚 Documentation (Developer API)
+
+### 📦 Using TurboCustomItems as a dependency
+
+<details>
+<summary><strong>Gradle (Kotlin DSL)</strong></summary>
+
+```kotlin
+repositories {
+    maven("https://repo.codemc.io/repository/goncalodelima/")
+}
+
+dependencies {
+    compileOnly("pt.gongas:TurboCustomItems-bukkit:1.0.5")
+}
+```
+
+</details> 
+
+<details> <summary><strong>Gradle (Groovy DSL)</strong></summary>
+
+```groovy
+repositories {
+    maven {
+        url "https://repo.codemc.io/repository/goncalodelima/"
+    }
+}
+
+dependencies {
+    compileOnly "pt.gongas:TurboCustomItems-bukkit:1.0.5"
+}
+```
+
+</details> 
+
+<details> <summary><strong>Maven</strong></summary>
+
+```maven
+<repositories>
+    <repository>
+        <id>codemc-goncalodelima</id>
+        <url>https://repo.codemc.io/repository/goncalodelima/</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>pt.gongas</groupId>
+        <artifactId>TurboCustomItems-bukkit</artifactId>
+        <version>1.0.5</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+```
+
+</details>
 
 ## Do you need support?
 Contact us on Discord: [Click here](https://discord.gg/uCZCmXKjKa)
