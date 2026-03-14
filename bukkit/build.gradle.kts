@@ -8,14 +8,22 @@ plugins {
 
 tasks {
 
-    named<ShadowJar>("shadowJar"){
+    named<ShadowJar>("shadowJar") {
+        configurations = listOf(project.configurations.runtimeClasspath.get())
         relocate("co.aikar.commands", "pt.gongas.customitems.lib.aikar.commands")
         relocate("co.aikar.locales", "pt.gongas.customitems.lib.aikar.locales")
         relocate("com.cryptomorin.xseries", "pt.gongas.customitems.lib.xseries")
+        exclude("META-INF/versions/**")
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
     build {
         dependsOn(shadowJar)
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -29,13 +37,6 @@ dependencies {
     implementation("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
     implementation("com.github.cryptomorin:XSeries:13.3.3")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.15.1")
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-    disableAutoTargetJvm()
 }
 
 tasks.withType<JavaCompile> {
